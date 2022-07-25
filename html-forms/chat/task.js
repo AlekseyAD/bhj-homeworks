@@ -27,6 +27,7 @@ form.addEventListener("keyup", function (event) {
           <div class="message__text"></div>
         </div>
         `;
+
     let message = document.querySelectorAll("div.message");
 
     let time = new Date().toLocaleTimeString("ru", {
@@ -39,12 +40,11 @@ form.addEventListener("keyup", function (event) {
         if (item.children[0].textContent.length == 0) {
           item.children[0].textContent = time;
           item.children[1].textContent = form.value;
+          form.value = "";
         }
       }
 
-   
       if (item.classList.contains("message_client") == false) {
-       
         if (item.children[1].textContent.length == 0) {
           item.children[0].textContent = time;
           let random = Math.floor(Math.random() * robotMessages.length);

@@ -24,12 +24,16 @@ const createTempTask = (task, index) => {
 
 taskAdd.addEventListener("click", (event) => {
   event.preventDefault();
-  console.log(tasksInput.value);
-  if (tasksInput.value !== "") {
-    tasks.push(new Task(tasksInput.value));
+  let task = tasksInput.value.trim();
+  console.log(task);
+  if (task !== "") {
+    tasks.push(new Task(task));
     updateLocalStorage();
     addHtml();
     tasksInput.value = "";
+  } else {
+    tasksInput.value = "";
+    alert('Введите название задачи!');
   }
 });
 

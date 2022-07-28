@@ -1,21 +1,44 @@
-// !Вариант 3
+// !Вариант 4
 let hasTooltip = Array.from(document.getElementsByClassName("has-tooltip"));
 const tooltipNewDiv = document.createElement("div");
 
 hasTooltip.forEach((item) => {
-  tooltipNewDiv.innerText = `${item.title}`;
   item.addEventListener("click", (event) => {
     event.preventDefault();
+    item.addEventListener("mouseleave", show_tip);
+    function show_tip() {
+      tooltipNewDiv.classList.remove("tooltip_active");
+    }
+
     tooltipNewDiv.classList.add("tooltip");
     let tooltipPlace = item.getBoundingClientRect();
+    tooltipNewDiv.title = item.getAttribute("title");
+    tooltipNewDiv.textContent = tooltipNewDiv.title;
     tooltipNewDiv.style.top = String(tooltipPlace.bottom) + "px";
     tooltipNewDiv.style.left = String(tooltipPlace.left) + "px";
     item.insertAdjacentElement("afterend", tooltipNewDiv);
-    if (!tooltipNewDiv.classList.contains("tooltip_active")) {
-      tooltipNewDiv.classList.add("tooltip_active");
-    }
+    tooltipNewDiv.classList.toggle("tooltip_active");
   });
 });
+
+// !Вариант 3 у всех подсказок одинаковый текст внутри, а во-вторых, повторный клик по подсказке должен скрывать её
+// let hasTooltip = Array.from(document.getElementsByClassName("has-tooltip"));
+// const tooltipNewDiv = document.createElement("div");
+
+// hasTooltip.forEach((item) => {
+//   tooltipNewDiv.innerText = `${item.title}`;
+//   item.addEventListener("click", (event) => {
+//     event.preventDefault();
+//     tooltipNewDiv.classList.add("tooltip");
+//     let tooltipPlace = item.getBoundingClientRect();
+//     tooltipNewDiv.style.top = String(tooltipPlace.bottom) + "px";
+//     tooltipNewDiv.style.left = String(tooltipPlace.left) + "px";
+//     item.insertAdjacentElement("afterend", tooltipNewDiv);
+//     if (!tooltipNewDiv.classList.contains("tooltip_active")) {
+//       tooltipNewDiv.classList.add("tooltip_active");
+//     }
+//   });
+// });
 
 // !Вариант 2 - Не верная работа подсказок при клике
 // let hasTooltip = document.getElementsByClassName("has-tooltip");
